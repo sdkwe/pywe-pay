@@ -6,7 +6,8 @@ import sys
 import requests
 from pywe_base import BaseWechat
 from pywe_exception import WeChatPayException
-from pywe_pay.api import WeChatJSAPI, WeChatOrder
+from pywe_pay.api.jsapi import WeChatJSAPI
+from pywe_pay.api.order import WeChatOrder
 from pywe_pay.base import BaseWeChatPayAPI
 from pywe_sign import calculate_signature
 from pywe_utils import random_string
