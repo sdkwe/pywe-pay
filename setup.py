@@ -18,7 +18,7 @@ setup(
     author='Hackathon',
     author_email='kimi.huang@brightcells.com',
 
-    packages=['pywe_token'],
+    packages=['pywe_pay'],
     py_modules=[],
     install_requires=['pywe_base', 'pywe_exception', 'pywe_sign', 'pywe_utils'],
 
