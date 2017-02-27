@@ -4,11 +4,10 @@ import datetime
 import random
 import time
 
-from pywe_sign import calculate_signature
-from pywe_utils import random_string, to_text
-
 from pywe_pay.base import BaseWeChatPayAPI
 from pywe_pay.utils import get_external_ip, timezone
+from pywe_sign import calculate_signature
+from pywe_utils import random_string, to_text
 
 
 class WeChatOrder(BaseWeChatPayAPI):

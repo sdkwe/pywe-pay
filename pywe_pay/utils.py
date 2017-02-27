@@ -8,18 +8,15 @@ import six
 from pywe_utils import to_text
 
 
-def dict_to_xml(d, sign):
+def dict_to_xml(d):
     xml = ['<xml>\n']
-    for k in sorted(d):
-        # use sorted to avoid test error on Py3k
-        v = d[k]
-        if isinstance(v, six.integer_types) or v.isdigit():
-            xml.append('<{0}>{1}</{0}>\n'.format(to_text(k), to_text(v)))
-        else:
-            xml.append(
-                '<{0}><![CDATA[{1}]]></{0}>\n'.format(to_text(k), to_text(v))
-            )
-    xml.append('<sign><![CDATA[{0}]]></sign>\n</xml>'.format(to_text(sign)))
+    for k, v in d.items():
+        if v:
+            if isinstance(v, six.integer_types) or v.isdigit():
+                xml.append('<{0}>{1}</{0}>\n'.format(to_text(k), to_text(v)))
+            else:
+                xml.append('<{0}><![CDATA[{1}]]></{0}>\n'.format(to_text(k), to_text(v)))
+    xml.append('</xml>')
     return ''.join(xml)
 
 

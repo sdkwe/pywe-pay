@@ -2,8 +2,9 @@
 
 import time
 
-from local_config_example import WechatPayConfig
 from pywe_pay import WeChatPay
+
+from local_config_example import WechatPayConfig
 
 
 class TestPayCommands(object):

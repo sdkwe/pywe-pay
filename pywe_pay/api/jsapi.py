@@ -3,10 +3,9 @@ from __future__ import absolute_import, unicode_literals
 
 import time
 
+from pywe_pay.base import BaseWeChatPayAPI
 from pywe_sign import calculate_signature
 from pywe_utils import random_string, to_text
-
-from pywe_pay.base import BaseWeChatPayAPI
 
 
 class WeChatJSAPI(BaseWeChatPayAPI):

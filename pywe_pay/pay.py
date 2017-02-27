@@ -6,15 +6,13 @@ from xml.parsers.expat import ExpatError
 
 import requests
 import xmltodict
-from optionaldict import optionaldict
 from pywe_base import BaseWechat
 from pywe_exception import WeChatPayException
-from pywe_sign import calculate_signature
-from pywe_utils import random_string
-
 from pywe_pay.api import WeChatJSAPI, WeChatOrder
 from pywe_pay.base import BaseWeChatPayAPI
 from pywe_pay.utils import dict_to_xml
+from pywe_sign import calculate_signature
+from pywe_utils import random_string
 
 
 def _is_api_endpoint(obj):
@@ -67,13 +65,13 @@ class WeChatPay(BaseWechat):
 
     def __request(self, method, endpoint, **kwargs):
         if isinstance(kwargs.get('data', ''), dict):
-            data = optionaldict(kwargs['data'])
-            if 'mchid' not in data:
-                data.setdefault('mch_id', self.mch_id)
-            data.setdefault('sub_mch_id', self.sub_mch_id)
-            data.setdefault('nonce_str', random_string(32))
-            sign = calculate_signature(data, self.api_key)
-            body = dict_to_xml(data, sign)
+            data = kwargs['data']
+            if 'mch_id' not in data:
+                data['mch_id'] = self.mch_id
+            data['sub_mch_id'] = self.sub_mch_id
+            data['nonce_str'] = random_string(32)
+            data['sign'] = calculate_signature(data, self.api_key)
+            body = dict_to_xml(data)
             body = body.encode('utf-8')
             kwargs['data'] = body
 
