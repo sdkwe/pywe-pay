@@ -2,17 +2,15 @@
 
 import inspect
 import sys
-from xml.parsers.expat import ExpatError
 
 import requests
-import xmltodict
 from pywe_base import BaseWechat
 from pywe_exception import WeChatPayException
 from pywe_pay.api import WeChatJSAPI, WeChatOrder
 from pywe_pay.base import BaseWeChatPayAPI
-from pywe_pay.utils import dict_to_xml
 from pywe_sign import calculate_signature
 from pywe_utils import random_string
+from pywe_xml import dict_to_xml, xml_to_dict
 
 
 def _is_api_endpoint(obj):
@@ -96,10 +94,8 @@ class WeChatPay(BaseWechat):
         res.encoding = 'utf-8'
         xml = res.text
 
-        try:
-            data = xmltodict.parse(xml)['xml']
-        except (xmltodict.ParsingInterrupted, ExpatError):
-            # 解析 XML 失败
+        data = xml_to_dict(xml)
+        if isinstance(data, basestring):
             return xml
 
         if data['return_code'] != 'SUCCESS' or data.get('result_code') != 'SUCCESS':

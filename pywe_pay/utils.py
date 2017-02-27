@@ -4,21 +4,6 @@ from __future__ import absolute_import, unicode_literals
 
 import socket
 
-import six
-from pywe_utils import to_text
-
-
-def dict_to_xml(d):
-    xml = ['<xml>\n']
-    for k, v in d.items():
-        if v:
-            if isinstance(v, six.integer_types) or v.isdigit():
-                xml.append('<{0}>{1}</{0}>\n'.format(to_text(k), to_text(v)))
-            else:
-                xml.append('<{0}><![CDATA[{1}]]></{0}>\n'.format(to_text(k), to_text(v)))
-    xml.append('</xml>')
-    return ''.join(xml)
-
 
 def get_external_ip():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
