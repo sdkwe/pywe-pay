@@ -21,6 +21,7 @@ setup(
     packages=['pywe_pay'],
     py_modules=[],
     install_requires=['pywe_base', 'pywe_exception', 'pywe_sign', 'pywe_utils', 'pywe_xml'],
+    include_package_data=True,
 
     classifiers=[
         "License :: OSI Approved :: BSD License",

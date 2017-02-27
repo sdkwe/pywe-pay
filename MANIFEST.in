@@ -1,0 +1,2 @@
+include README.rst
+include pywe_pay/api/*.py
