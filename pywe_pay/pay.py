@@ -23,8 +23,12 @@ def _is_api_endpoint(obj):
 
 
 class WeChatPay(BaseWechat):
-    order = WeChatOrder()
+    billl = WeChatBill()
+    coupon = WeChatCoupon()
     jsapi = WeChatJSAPI()
+    micropay = WeChatMicroPay()
+    order = WeChatOrder()
+    redpack = WeChatRedpack()
 
     def __new__(cls, *args, **kwargs):
         self = super(WeChatPay, cls).__new__(cls)
