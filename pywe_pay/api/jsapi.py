@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from __future__ import absolute_import, unicode_literals
 
 import time
@@ -24,7 +25,7 @@ class WeChatJSAPI(BaseWeChatPayAPI):
             'timeStamp': timestamp or to_text(int(time.time())),
             'nonceStr': nonce_str or random_string(32),
             'signType': 'MD5',
-            'package': 'prepay_id={0}'.format(prepay_id),
+            'package': 'prepay_id={}'.format(prepay_id),
         }
         return calculate_signature(data, self._client.api_key)
 
@@ -35,14 +36,14 @@ class WeChatJSAPI(BaseWeChatPayAPI):
         :param prepay_id: 统一下单接口返回的 prepay_id 参数值
         :param timestamp: 可选，时间戳，默认为当前时间戳
         :param nonce_str: 可选，随机字符串，默认自动生成
-        :return: 签名
+        :return: 参数
         """
         data = {
             'appId': self.appid,
             'timeStamp': timestamp or to_text(int(time.time())),
             'nonceStr': nonce_str or random_string(32),
             'signType': 'MD5',
-            'package': 'prepay_id={0}'.format(prepay_id),
+            'package': 'prepay_id={}'.format(prepay_id),
         }
         sign = calculate_signature(data, self._client.api_key)
         data['paySign'] = sign

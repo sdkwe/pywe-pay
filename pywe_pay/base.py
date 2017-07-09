@@ -2,6 +2,9 @@
 
 from __future__ import absolute_import, unicode_literals
 
+import random
+from datetime import datetime
+
 
 class BaseWeChatPayAPI(object):
     """ WeChat Pay API base class """
@@ -29,3 +32,11 @@ class BaseWeChatPayAPI(object):
     @property
     def sub_mch_id(self):
         return self._client.sub_mch_id
+
+    @property
+    def out_trade_no(self):
+        return '{}{}{}'.format(
+            self.mch_id,
+            datetime.now().strftime('%Y%m%d%H%M%S'),
+            random.randint(1000, 10000)
+        )

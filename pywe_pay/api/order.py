@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import, unicode_literals
+
 import datetime
-import random
 import time
 
 from pywe_pay.base import BaseWeChatPayAPI
@@ -43,19 +44,13 @@ class WeChatOrder(BaseWeChatPayAPI):
             time_start = now
         if time_expire is None:
             time_expire = hours_later
-        if not out_trade_no:
-            out_trade_no = '{}{}{}'.format(
-                self.mch_id,
-                now.strftime('%Y%m%d%H%M%S'),
-                random.randint(1000, 10000)
-            )
         data = {
             'appid': self.appid,
             'device_info': device_info,
             'body': body,
             'detail': detail,
             'attach': attach,
-            'out_trade_no': out_trade_no,
+            'out_trade_no': out_trade_no or self.out_trade_no(),
             'fee_type': fee_type,
             'total_fee': total_fee,
             'spbill_create_ip': client_ip or get_external_ip(),
@@ -105,7 +100,7 @@ class WeChatOrder(BaseWeChatPayAPI):
         :param prepay_id: 统一下单接口返回的 prepay_id 参数值
         :param timestamp: 可选，时间戳，默认为当前时间戳
         :param nonce_str: 可选，随机字符串，默认自动生成
-        :return: 签名
+        :return: 参数
         """
         data = {
             'appid': self.appid,
@@ -118,3 +113,17 @@ class WeChatOrder(BaseWeChatPayAPI):
         sign = calculate_signature(data, self._client.api_key)
         data['sign'] = sign
         return data
+
+    def reverse(self, transaction_id=None, out_trade_no=None):
+        """
+        撤销订单
+        :param transaction_id: 可选，微信的订单号，优先使用
+        :param out_trade_no: 可选，商户系统内部的订单号,transaction_id、out_trade_no二选一，如果同时存在优先级：transaction_id> out_trade_no
+        :return: 返回的结果数据
+        """
+        data = {
+            'appid': self.appid,
+            'transaction_id': transaction_id,
+            'out_trade_no': out_trade_no,
+        }
+        return self._post('secapi/pay/reverse', data=data)
