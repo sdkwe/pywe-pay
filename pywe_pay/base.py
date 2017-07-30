@@ -35,7 +35,7 @@ class BaseWeChatPayAPI(object):
 
     @property
     def out_trade_no(self):
-        return '{}{}{}'.format(
+        return '{0}{1}{2}'.format(
             self.mch_id,
             datetime.now().strftime('%Y%m%d%H%M%S'),
             random.randint(1000, 10000)
