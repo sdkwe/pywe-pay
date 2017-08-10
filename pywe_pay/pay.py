@@ -89,6 +89,7 @@ class WeChatPay(BaseWechat):
         res = requests.request(
             method=method,
             url='{base}{endpoint}'.format(base=self.MCH_DOMAIN, endpoint=endpoint),
+            verify=False,
             **kwargs
         )
 
