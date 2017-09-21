@@ -23,7 +23,7 @@ class WeChatCoupon(BaseWeChatPayAPI):
             'coupon_stock_id': stock_id,
             'openid': openid,
             'openid_count': 1,
-            'partner_trade_no': out_trade_no or self.out_trade_no(),
+            'partner_trade_no': out_trade_no or self.out_trade_no,
             'op_user_id': op_user_id,
             'device_info': device_info,
             'version': '1.0',

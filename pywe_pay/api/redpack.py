@@ -37,7 +37,7 @@ class WeChatRedpack(BaseWeChatPayAPI):
             'remark': remark,
             'client_ip': client_ip or get_external_ip(),
             'total_num': total_num,
-            'mch_billno': out_trade_no or self.out_trade_no(),
+            'mch_billno': out_trade_no or self.out_trade_no,
             'scene_id': scene_id,
             'risk_info': None,
             'consume_mch_id': consume_mch_id
@@ -76,7 +76,7 @@ class WeChatRedpack(BaseWeChatPayAPI):
             'total_num': total_num,
             'client_ip': client_ip or get_external_ip(),
             'amt_type': amt_type,
-            'mch_billno': out_trade_no or self.out_trade_no(),
+            'mch_billno': out_trade_no or self.out_trade_no,
             'scene_id': scene_id,
             'risk_info': None,
             'consume_mch_id': consume_mch_id

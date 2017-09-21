@@ -30,7 +30,7 @@ class WeChatMicroPay(BaseWeChatPayAPI):
             'body': body,
             'detail': detail,
             'attach': attach,
-            'out_trade_no': out_trade_no or self.out_trade_no(),
+            'out_trade_no': out_trade_no or self.out_trade_no,
             'total_fee': total_fee,
             'fee_type': fee_type,
             'spbill_create_ip': client_ip or get_external_ip(),

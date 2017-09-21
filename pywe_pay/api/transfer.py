@@ -33,7 +33,7 @@ class WeChatTransfer(BaseWeChatPayAPI):
             'mch_appid': self.appid,
             'mchid': self.mch_id,
             'device_info': device_info,
-            'partner_trade_no': out_trade_no or self.out_trade_no(),
+            'partner_trade_no': out_trade_no or self.out_trade_no,
             'openid': openid,
             'check_name': check_name,
             're_user_name': real_name,
