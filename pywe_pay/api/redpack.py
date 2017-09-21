@@ -42,7 +42,7 @@ class WeChatRedpack(BaseWeChatPayAPI):
             'risk_info': None,
             'consume_mch_id': consume_mch_id
         }
-        return self._post('mmpaymkttransfers/sendredpack', data=data)
+        return self._post('/mmpaymkttransfers/sendredpack', data=data)
 
     def send_group(self, openid, total_amount, send_name, act_name, wishing,
                    remark, total_num, client_ip=None, amt_type="ALL_RAND",
@@ -81,7 +81,7 @@ class WeChatRedpack(BaseWeChatPayAPI):
             'risk_info': None,
             'consume_mch_id': consume_mch_id
         }
-        return self._post('mmpaymkttransfers/sendgroupredpack', data=data)
+        return self._post('/mmpaymkttransfers/sendgroupredpack', data=data)
 
     def query(self, out_trade_no, bill_type='MCHT'):
         """
@@ -96,4 +96,4 @@ class WeChatRedpack(BaseWeChatPayAPI):
             'bill_type': bill_type,
             'appid': self.appid,
         }
-        return self._post('mmpaymkttransfers/gethbinfo', data=data)
+        return self._post('/mmpaymkttransfers/gethbinfo', data=data)

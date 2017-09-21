@@ -41,7 +41,7 @@ class WeChatTransfer(BaseWeChatPayAPI):
             'desc': desc,
             'spbill_create_ip': client_ip or get_external_ip(),
         }
-        return self._post('mmpaymkttransfers/promotion/transfers', data=data)
+        return self._post('/mmpaymkttransfers/promotion/transfers', data=data)
 
     def query(self, out_trade_no):
         """
@@ -54,4 +54,4 @@ class WeChatTransfer(BaseWeChatPayAPI):
             'appid': self.appid,
             'partner_trade_no': out_trade_no,
         }
-        return self._post('mmpaymkttransfers/gettransferinfo', data=data)
+        return self._post('/mmpaymkttransfers/gettransferinfo', data=data)

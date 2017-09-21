@@ -38,7 +38,7 @@ class WeChatMicroPay(BaseWeChatPayAPI):
             'limit_pay': limit_pay,
             'auth_code': auth_code,
         }
-        return self._post('pay/micropay', data=data)
+        return self._post('/pay/micropay', data=data)
 
     def query(self, transaction_id=None, out_trade_no=None):
         """
@@ -53,4 +53,4 @@ class WeChatMicroPay(BaseWeChatPayAPI):
             'transaction_id': transaction_id,
             'out_trade_no': out_trade_no,
         }
-        return self._post('pay/orderquery', data=data)
+        return self._post('/pay/orderquery', data=data)

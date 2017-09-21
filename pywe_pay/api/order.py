@@ -126,4 +126,4 @@ class WeChatOrder(BaseWeChatPayAPI):
             'transaction_id': transaction_id,
             'out_trade_no': out_trade_no,
         }
-        return self._post('secapi/pay/reverse', data=data)
+        return self._post('/secapi/pay/reverse', data=data)

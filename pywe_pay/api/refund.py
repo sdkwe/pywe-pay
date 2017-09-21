@@ -35,7 +35,7 @@ class WeChatRefund(BaseWeChatPayAPI):
             'op_user_id': op_user_id or self.mch_id,
             'refund_account': refund_account,
         }
-        return self._post('secapi/pay/refund', data=data)
+        return self._post('/secapi/pay/refund', data=data)
 
     def query(self, refund_id=None, out_refund_no=None, transaction_id=None, out_trade_no=None, device_info=None):
         """
@@ -56,4 +56,4 @@ class WeChatRefund(BaseWeChatPayAPI):
             'out_refund_no': out_refund_no,
             'refund_id': refund_id,
         }
-        return self._post('pay/refundquery', data=data)
+        return self._post('/pay/refundquery', data=data)

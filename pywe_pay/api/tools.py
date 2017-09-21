@@ -18,7 +18,7 @@ class WeChatTools(BaseWeChatPayAPI):
             'appid': self.appid,
             'long_url': long_url,
         }
-        return self._post('tools/shorturl', data=data)
+        return self._post('/tools/shorturl', data=data)
 
     def auto_code_to_openid(self, auth_code):
         """
@@ -31,4 +31,4 @@ class WeChatTools(BaseWeChatPayAPI):
             'appid': self.appid,
             'auth_code': auth_code,
         }
-        return self._post('tools/authcodetoopenid', data=data)
+        return self._post('/tools/authcodetoopenid', data=data)

@@ -30,4 +30,4 @@ class WeChatBill(BaseWeChatPayAPI):
             'bill_type': bill_type,
             'device_info': device_info,
         }
-        return self._post('pay/downloadbill', data=data)
+        return self._post('/pay/downloadbill', data=data)

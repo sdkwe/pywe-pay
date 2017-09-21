@@ -29,7 +29,7 @@ class WeChatCoupon(BaseWeChatPayAPI):
             'version': '1.0',
             'type': 'XML',
         }
-        return self._post('mmpaymkttransfers/send_coupon', data=data)
+        return self._post('/mmpaymkttransfers/send_coupon', data=data)
 
     def query_stock(self, stock_id, op_user_id=None, device_info=None):
         """
@@ -48,7 +48,7 @@ class WeChatCoupon(BaseWeChatPayAPI):
             'version': '1.0',
             'type': 'XML',
         }
-        return self._post('mmpaymkttransfers/query_coupon_stock', data=data)
+        return self._post('/mmpaymkttransfers/query_coupon_stock', data=data)
 
     def query_coupon(self, coupon_id, openid, op_user_id=None, device_info=None):
         """
@@ -69,4 +69,4 @@ class WeChatCoupon(BaseWeChatPayAPI):
             'version': '1.0',
             'type': 'XML',
         }
-        return self._post('promotion/query_coupon', data=data)
+        return self._post('/promotion/query_coupon', data=data)
