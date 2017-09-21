@@ -12,6 +12,9 @@ from pywe_pay.api.jsapi import WeChatJSAPI
 from pywe_pay.api.micropay import WeChatMicroPay
 from pywe_pay.api.order import WeChatOrder
 from pywe_pay.api.redpack import WeChatRedpack
+from pywe_pay.api.refund import WeChatRefund
+from pywe_pay.api.tools import WeChatTools
+from pywe_pay.api.transfer import WeChatTransfer
 from pywe_pay.base import BaseWeChatPayAPI
 from pywe_sign import calculate_signature
 from pywe_utils import random_string
@@ -29,6 +32,9 @@ class WeChatPay(BaseWechat):
     micropay = WeChatMicroPay()
     order = WeChatOrder()
     redpack = WeChatRedpack()
+    refund = WeChatRefund()
+    tools = WeChatTools()
+    transfer = WeChatTransfer()
 
     def __new__(cls, *args, **kwargs):
         self = super(WeChatPay, cls).__new__(cls)
