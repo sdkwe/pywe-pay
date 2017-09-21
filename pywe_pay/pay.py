@@ -79,10 +79,10 @@ class WeChatPay(BaseWechat):
     def __request(self, method, endpoint, **kwargs):
         if isinstance(kwargs.get('data', ''), dict):
             data = kwargs['data']
-            if 'mch_id' not in data:
-                data['mch_id'] = self.mch_id
-            data['sub_mch_id'] = self.sub_mch_id
-            data['nonce_str'] = random_string(32)
+            if 'mchid' not in data:
+                data.setdefault('mch_id', self.mch_id)
+            data.setdefault('sub_mch_id', self.sub_mch_id)
+            data.setdefault('nonce_str', random_string(32))
             data['sign'] = calculate_signature(data, self.api_key)
             body = dict_to_xml(data)
             body = body.encode('utf-8')
