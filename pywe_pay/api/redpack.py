@@ -40,7 +40,7 @@ class WeChatRedpack(BaseWeChatPayAPI):
             'mch_billno': out_trade_no or self.out_trade_no,
             'scene_id': scene_id,
             'risk_info': None,
-            'consume_mch_id': consume_mch_id
+            'consume_mch_id': consume_mch_id,
         }
         return self._post('/mmpaymkttransfers/sendredpack', data=data)
 
@@ -79,7 +79,7 @@ class WeChatRedpack(BaseWeChatPayAPI):
             'mch_billno': out_trade_no or self.out_trade_no,
             'scene_id': scene_id,
             'risk_info': None,
-            'consume_mch_id': consume_mch_id
+            'consume_mch_id': consume_mch_id,
         }
         return self._post('/mmpaymkttransfers/sendgroupredpack', data=data)
 

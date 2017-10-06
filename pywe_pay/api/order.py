@@ -3,6 +3,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import datetime
+import json
 import time
 
 from pywe_pay.base import BaseWeChatPayAPI
@@ -16,7 +17,7 @@ class WeChatOrder(BaseWeChatPayAPI):
     def create(self, trade_type, body, total_fee, notify_url, client_ip=None,
                openid=None, out_trade_no=None, detail=None, attach=None,
                fee_type='CNY', time_start=None, time_expire=None,
-               goods_tag=None, product_id=None, device_info=None, limit_pay=None):
+               goods_tag=None, product_id=None, device_info=None, limit_pay=None, scene_info=None):
         """
         统一下单接口
 
@@ -36,6 +37,8 @@ class WeChatOrder(BaseWeChatPayAPI):
         :param product_id: 可选，trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义
         :param device_info: 可选，终端设备号(门店号或收银设备ID)，注意：PC网页或公众号内支付请传"WEB"
         :param limit_pay: 可选，指定支付方式，no_credit--指定不能使用信用卡支付
+        :param scene_info: 可选，上报支付的场景信息
+        :type scene_info: dict
         :return: 返回的结果数据
         """
         now = datetime.datetime.fromtimestamp(time.time(), tz=timezone('Asia/Shanghai'))
@@ -44,6 +47,8 @@ class WeChatOrder(BaseWeChatPayAPI):
             time_start = now
         if time_expire is None:
             time_expire = hours_later
+        if scene_info is not None:
+            scene_info = json.dumps(scene_info, ensure_ascii=False)
         data = {
             'appid': self.appid,
             'device_info': device_info,
@@ -62,6 +67,7 @@ class WeChatOrder(BaseWeChatPayAPI):
             'limit_pay': limit_pay,
             'product_id': product_id,
             'openid': openid,
+            'scene_info': scene_info,
         }
         return self._post('/pay/unifiedorder', data=data)
 
@@ -108,7 +114,7 @@ class WeChatOrder(BaseWeChatPayAPI):
             'prepayid': prepay_id,
             'package': 'Sign=WXPay',
             'timestamp': timestamp or to_text(int(time.time())),
-            'noncestr': nonce_str or random_string(32)
+            'noncestr': nonce_str or random_string(32),
         }
         sign = calculate_signature(data, self._client.api_key)
         data['sign'] = sign
