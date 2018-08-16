@@ -29,6 +29,10 @@ class WeChatTransfer(BaseWeChatPayAPI):
         :param device_info: 可选，微信支付分配的终端设备号
         :return: 返回的结果信息
         """
+        #
+        # WeChatPayException: OrderedDict([(u'return_code', u'SUCCESS'), (u'return_msg', u'\u53c2\u6570\u9519\u8bef:\u63cf\u8ff0\u4fe1\u606f\u5927\u4e8e100Bytes'), (u'result_code', u'FAIL'), (u'err_code', u'PARAM_ERROR'), (u'err_code_des', u'\u53c2\u6570\u9519\u8bef:\u63cf\u8ff0\u4fe1\u606f\u5927\u4e8e100Bytes')])
+        # 参数错误:描述信息大于100Bytes
+        #
         data = {
             'mch_appid': self.appid,
             'mchid': self.mch_id,
@@ -38,7 +42,7 @@ class WeChatTransfer(BaseWeChatPayAPI):
             'check_name': check_name,
             're_user_name': real_name,
             'amount': amount,
-            'desc': desc,
+            'desc': desc if len(desc) <= 33 else desc[:32] + '...',
             'spbill_create_ip': client_ip or get_external_ip(),
         }
         return self._post('/mmpaymkttransfers/promotion/transfers', data=data)

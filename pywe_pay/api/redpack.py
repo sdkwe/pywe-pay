@@ -23,7 +23,7 @@ class WeChatRedpack(BaseWeChatPayAPI):
         :param client_ip: 可选，调用接口的机器 IP 地址
         :param total_num: 可选，红包发放总人数，默认为 1
         :param out_trade_no: 可选，商户订单号，默认会自动生成
-        :param scene_id: 可选，发放红包使用场景，红包金额大于200时必传
+        :param scene_id: 可选，发放红包使用场景，红包金额大于200或者小于1元时必传
         :param consume_mch_id: 可选，资金授权商户号。服务商替特约商户发放时使用
         :return: 返回的结果数据字典
         """
