@@ -8,7 +8,7 @@ from pywe_pay.utils import get_external_ip
 
 class WeChatTransfer(BaseWeChatPayAPI):
 
-    def transfer(self, openid, amount, desc, client_ip=None,
+    def transfer(self, openid, amount, desc, client_ip=None, spbill_create_ip=None,
                  check_name='OPTION_CHECK', real_name=None,
                  out_trade_no=None, device_info=None):
         """
@@ -17,7 +17,7 @@ class WeChatTransfer(BaseWeChatPayAPI):
         :param openid: 接受收红包的用户在公众号下的 openid
         :param amount: 付款金额，单位分
         :param desc: 付款说明
-        :param client_ip: 可选，调用接口机器的 IP 地址
+        :param spbill_create_ip: 可选，调用接口机器的 IP 地址
         :param check_name: 可选，校验用户姓名选项，
                            NO_CHECK：不校验真实姓名,
                            FORCE_CHECK：强校验真实姓名（未实名认证的用户会校验失败，无法转账）,
@@ -43,7 +43,7 @@ class WeChatTransfer(BaseWeChatPayAPI):
             're_user_name': real_name,
             'amount': amount,
             'desc': desc if len(desc) <= 33 else desc[:32] + '...',
-            'spbill_create_ip': client_ip or get_external_ip(),
+            'spbill_create_ip': spbill_create_ip or client_ip or get_external_ip(),
         }
         return self._post('/mmpaymkttransfers/promotion/transfers', data=data)
 
