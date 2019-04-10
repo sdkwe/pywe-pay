@@ -10,7 +10,8 @@ class WeChatRedpack(BaseWeChatPayAPI):
 
     def send(self, openid, total_amount, send_name, act_name,
              wishing, remark, total_num=1, client_ip=None,
-             out_trade_no=None, scene_id=None, consume_mch_id=None):
+             out_trade_no=None, scene_id=None, consume_mch_id=None,
+             miniprogram=False, notify_way='JSAPI'):
         """
         发送现金红包
 
@@ -25,6 +26,8 @@ class WeChatRedpack(BaseWeChatPayAPI):
         :param out_trade_no: 可选，商户订单号，默认会自动生成
         :param scene_id: 可选，发放红包使用场景，红包金额大于200或者小于1元时必传
         :param consume_mch_id: 可选，资金授权商户号。服务商替特约商户发放时使用
+        :param miniprogram: 是否发放小程序红包，默认为否
+        :param notify_way: 通过 JSAPI 方式领取红包，小程序红包固定传 JSAPI
         :return: 返回的结果数据字典
         """
         data = {
@@ -42,7 +45,9 @@ class WeChatRedpack(BaseWeChatPayAPI):
             'risk_info': None,
             'consume_mch_id': consume_mch_id,
         }
-        return self._post('/mmpaymkttransfers/sendredpack', data=data)
+        if miniprogram:
+            data['notify_way'] = notify_way
+        return self._post('/mmpaymkttransfers/sendminiprogramhb' if miniprogram else '/mmpaymkttransfers/sendredpack', data=data)
 
     def send_group(self, openid, total_amount, send_name, act_name, wishing,
                    remark, total_num, client_ip=None, amt_type="ALL_RAND",
