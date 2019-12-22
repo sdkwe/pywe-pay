@@ -21,7 +21,7 @@ class WeChatOrder(BaseWeChatPayAPI):
         """
         统一下单接口
 
-        :param trade_type: 交易类型，取值如下：JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付
+        :param trade_type: 交易类型，取值如下：JSAPI--公众号支付、NATIVE--原生扫码支付、APP--APP支付、MWEB--H5支付
         :param body: 商品描述
         :param total_fee: 总金额，单位分
         :param notify_url: 接收微信支付异步通知回调地址
