@@ -20,6 +20,8 @@ from pywe_sign import calculate_signature
 from pywe_utils import random_string
 from pywe_xml import dict_to_xml, xml_to_dict
 
+from .compat import basestring
+
 
 def _is_api_endpoint(obj):
     return isinstance(obj, BaseWeChatPayAPI)
